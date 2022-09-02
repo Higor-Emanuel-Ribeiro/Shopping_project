@@ -1,5 +1,5 @@
 # Shopping_project
-Project related to the Java OO course on the Udemy platform. This is intended to simulate a purchase made by the user.
+Project related to Java OO course on Udemy platform. It is intended to simulate a purchase made by the user, where he will put his personal data, the current status of the order, the name, price and quantity of the product and the payment method.
 
 References📚:
 
