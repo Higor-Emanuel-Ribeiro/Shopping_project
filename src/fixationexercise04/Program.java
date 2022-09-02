@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Program {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
@@ -69,6 +69,24 @@ public class Program {
             System.out.println();
             System.out.println("ORDER SUMMARY: ");
             System.out.print(order);
+            
+            System.out.println();
+            System.out.print("What will be the payment method? Debit or credit: ");
+            sc.nextLine();
+            String answer = sc.nextLine().toUpperCase();
+            if ("DEBIT".equals(answer)) {
+                order.paymentWithoutDebit();
+                System.out.println("Payment in the amount of R$" + order.getAmount() + " successfully processed");
+            }
+            else if ("CREDIT".equals(answer)) {
+                System.out.print("How many installments? ");
+                int installments = sc.nextInt();
+                order.paymentWithoutCredit(installments);                
+                System.out.println("Payment processed successfully. Here's your installments maturity report!");
+                for (double itm : order.getService()) {
+                    System.out.println("- " + itm);
+                }
+            }
 
             sc.close();
         }

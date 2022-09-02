@@ -13,9 +13,12 @@ public class Order {
     
     private Date moment;
     private OrderStatus status;
+    private Double amount;
     
     private Client clients;
     List<OrderItem> itens = new ArrayList<>();
+    List<Double> service = new ArrayList<>();
+    
 
     public Order(Date moment, OrderStatus status, Client clients) {
         this.moment = moment;
@@ -37,6 +40,10 @@ public class Order {
         this.status = status;
     }
 
+    public Double getAmount() {
+        return amount;
+    }
+
     public Client getClients() {
         return clients;
     }
@@ -47,6 +54,10 @@ public class Order {
 
     public List<OrderItem> getOrderItens() {
         return itens;
+    }
+
+    public List<Double> getService() {
+        return service;
     }
     
     public void addItem(OrderItem item) {
@@ -68,6 +79,22 @@ public class Order {
             return total;
         }
     }
+    
+    public void paymentWithoutDebit() {
+        amount = total() - (total() * 0.05);
+    }
+    
+    public void paymentWithoutCredit(Integer installments) {
+         double valueInstallments = total() / installments;
+         for (int i = 1; i <= installments; i++) {
+            amount = valueInstallments + interest(valueInstallments, i);
+            service.add(amount);
+         }  
+    }
+    
+    private double interest(Double amount, Integer months) {
+        return amount * 0.01 * months;
+    } 
     
     @Override
     public String toString() {
